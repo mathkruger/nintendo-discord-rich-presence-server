@@ -21,5 +21,18 @@ module.exports = {
                 error
             });
         }
+    },
+
+    removePresence(request, response) {
+        try {
+            client.updatePresence({});
+
+            return response.status(200).send();
+        } catch (error) {
+            return response.status(500).send({
+                success: false,
+                error
+            });
+        }
     }
 }

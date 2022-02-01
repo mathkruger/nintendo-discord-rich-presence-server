@@ -9,5 +9,6 @@ routes.get('/auth/token', AuthController.getToken);
 routes.get('/game/info', GameController.searchGame);
 routes.get('/game/cover', GameController.getGameCover);
 routes.get('/discord/update', DiscordController.updatePresence);
+routes.get('/discord/remove', DiscordController.removePresence);
 
 module.exports = routes;
