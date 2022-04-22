@@ -1,9 +1,10 @@
 const app_config = require('../../config');
 const client = require('discord-rich-presence')(app_config.discord_client_id);
 const gameStatusEnum = {
-    'playing': 'Jogando',
-    'paused': 'Jogo pausado',
-    'no-game': 'Procurando novo jogo'
+    'playing': '🕹 Jogando',
+    'lobby': '⌛ Querendo jogar com alguém',
+    'paused': '⏸️ Jogo pausado',
+    'no-game': '🔎 Procurando novo jogo'
 };
 
 module.exports = {
