@@ -1,2 +1,2 @@
-const app = require("./api");
-app.listen(process.env.PORT || 3333);
+const { api } = require("./api");
+api.listen(process.env.PORT || 3333);
