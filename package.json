@@ -10,10 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "base64url": "^3.0.1",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "discord-rich-presence": "^0.0.8",
     "discord-rpc": "^4.0.1",
     "express": "^4.17.2",
-    "nintendo-switch-eshop": "^7.1.0"
+    "nintendo-switch-eshop": "^7.1.0",
+    "nxapi": "^0.1.0",
+    "request-promise-native": "^1.0.9",
+    "uuid": "^8.3.2"
   }
 }
