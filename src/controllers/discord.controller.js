@@ -10,12 +10,12 @@ const gameStatusEnum = {
 module.exports = {
     updatePresence(request, response) {
         try {
-            const { state, details } = request.query;
+            const { state, details, startTime } = request.query;
 
             client.updatePresence({
                 state: gameStatusEnum[state],
                 details: decodeURI(details),
-                startTimestamp: Date.now(),
+                startTimestamp: startTime ? new Date(startTime) : Date.now(),
                 largeImageKey: 'switch',
                 instance: true,
             });
