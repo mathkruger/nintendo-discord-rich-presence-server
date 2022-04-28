@@ -58,9 +58,9 @@ module.exports = {
             const userFound = userInformation.result.friends
             .find(x => x.name.toLowerCase() === userToTrack.toLowerCase());
 
-            response.json(userFound ? userFound.presence : {});
+            response.json(userFound ? userFound : {});
         } catch (error) {
             handleServerError(response, error);
         }
-    },
+    }
 }
