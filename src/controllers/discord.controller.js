@@ -1,5 +1,4 @@
-const app_config = require('../../config');
-const client = require('discord-rich-presence')(app_config.discord_client_id);
+const { getDiscordClient, getImageKey } = require('../services/discord.service');
 const gameStatusEnum = {
     'playing': '🕹 Jogando',
     'lobby': '⌛ Querendo jogar com alguém',
@@ -10,21 +9,33 @@ const gameStatusEnum = {
 module.exports = {
     updatePresence(request, response) {
         try {
-            const { state, details, startTime } = request.query;
+            const { state, details, friendCode, eshopUrl } = request.query;
+            const discordGameName = state === 'no-game' ? 'default' : details;
+            const client = getDiscordClient(discordGameName);
 
-            client.updatePresence({
-                state: gameStatusEnum[state],
-                details: decodeURI(details),
-                startTimestamp: startTime ? new Date(startTime) : Date.now(),
-                largeImageKey: 'switch',
+            const largeImageKey = getImageKey(discordGameName);
+
+            const presenceStatus = {
+                details: largeImageKey !== 'switch' ? 'Nintendo Switch' : decodeURI(details),
+                state: gameStatusEnum[state] + (friendCode ? ' | SW-' + friendCode : ''),
+                startTimestamp: Date.now(),
                 instance: true,
-            });
+                largeImageKey: largeImageKey || 'default',
+                buttons: eshopUrl ? [
+                    {
+                        label: 'Nintendo eShop',
+                        url: eshopUrl,
+                    }
+                ] : []
+            };
+
+            client.updatePresence(presenceStatus);
 
             return response.status(200).send();
         } catch (error) {
             return response.status(500).send({
-                success: false,
-                error: error
+                error: error.message,
+                stack: error.stack
             });
         }
     }

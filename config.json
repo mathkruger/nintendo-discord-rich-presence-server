@@ -1,3 +1,40 @@
 {
-    "discord_client_id": "938073914284851200"
+    "discord_clients": [
+        {
+            "name": "default",
+            "client": "938073914284851200"
+        },
+        {
+            "name": "Splatoon 2",
+            "client": "950886725398429726"
+        },
+        {
+            "name": "Nintendo Entertainment System - Nintendo Switch Online",
+            "client": "950907272438104064",
+            "largeImageText": "Nintendo Entertainment System"
+        },
+        {
+            "name": "Super Nintendo Entertainment System - Nintendo Switch Online",
+            "client": "950907272438104064",
+            "largeImageText": "Super Nintendo Entertainment System"
+        },
+        {
+            "name": "Nintendo 64 - Nintendo Switch Online",
+            "client": "950907272438104064",
+            "largeImageText": "Nintendo 64"
+        },
+        {
+            "name": "SEGA Mega Drive - Nintendo Switch Online",
+            "client": "950907272438104064",
+            "largeImageText": "SEGA Mega Drive"
+        },
+        {
+            "name": "Animal Crossing: New Horizons",
+            "client": "950908097235415079"
+        },
+        {
+            "name": "The Legend of Zelda: Breath of the Wild",
+            "client": "966102432838996009"
+        }
+    ]
 }
