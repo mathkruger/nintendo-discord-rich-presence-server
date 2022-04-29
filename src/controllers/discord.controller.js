@@ -26,7 +26,7 @@ module.exports = {
                         label: 'Nintendo eShop',
                         url: eshopUrl,
                     }
-                ] : []
+                ] : undefined
             };
 
             client.updatePresence(presenceStatus);
