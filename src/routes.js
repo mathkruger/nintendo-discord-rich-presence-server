@@ -9,6 +9,7 @@ routes.get('/game/info', GameController.searchGame);
 
 routes.get('/nintendo/auth', NintendoController.getAuthUrl);
 routes.get('/nintendo/token', NintendoController.getAccessToken);
+routes.get('/nintendo/token/renew', NintendoController.renewAccessToken());
 routes.get('/nintendo/user', NintendoController.getUserDetails);
 routes.get('/nintendo/presence', NintendoController.getUserPresence);
 

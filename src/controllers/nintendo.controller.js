@@ -34,7 +34,19 @@ module.exports = {
             const sessionToken = await getSessionToken(code, verifier);
             const accessToken = await getApiAccessToken(sessionToken);
             response.json({
-                accessToken
+                sessionToken,
+                accessToken,
+            });
+        } catch (error) {
+            handleServerError(response, error);
+        }
+    },
+    async renewAccessToken(request, response) {
+        try {
+            const { sessionToken } = request.query;
+            const accessToken = await getApiAccessToken(sessionToken);
+            response.json({
+                accessToken,
             });
         } catch (error) {
             handleServerError(response, error);

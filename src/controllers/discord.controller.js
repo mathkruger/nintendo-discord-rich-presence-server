@@ -24,7 +24,7 @@ module.exports = {
                 buttons: eshopUrl ? [
                     {
                         label: 'Nintendo eShop',
-                        url: eshopUrl,
+                        url: decodeURI(eshopUrl),
                     }
                 ] : undefined
             };
