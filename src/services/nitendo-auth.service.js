@@ -179,6 +179,7 @@ async function getApiLogin(userinfo, flapg_nso) {
             })
         });
         const data = await response.json();
+        console.log(JSON.stringify(data));
         if (data.result) {
             return data.result.webApiServerCredential.accessToken;
         }
