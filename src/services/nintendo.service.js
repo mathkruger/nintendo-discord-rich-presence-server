@@ -20,7 +20,7 @@ const request = (url, method, params, accessToken) => {
 }
 
 module.exports = {
-    async getUserFriendList(accessToken) {
+    async getUserFromFriends(accessToken, username) {
         try {
             const response = await request('/v3/Friend/List', 'POST', '{"parameter": {}}', accessToken);
             const data = await response.json();
@@ -29,7 +29,10 @@ module.exports = {
                 throw new Error(data.errorMessage);
             }
 
-            return data;
+            const userFound = data.result.friends
+            .find(x => x.name.toLowerCase() === username.toLowerCase());
+
+            return userFound ? userFound : {};
         } catch (error) {
             throw new Error(error);
         }
@@ -47,5 +50,5 @@ module.exports = {
         } catch (error) {
             throw new Error(error);
         }
-    }
+    },
 }

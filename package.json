@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js --mode api",
+    "start-client": "node src/index.js --mode client"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "express": "^4.17.2",
     "nintendo-switch-eshop": "^7.1.0",
     "node-fetch": "^2.6.7",
+    "readline-sync": "^1.4.10",
     "uuid": "^8.3.2"
   }
 }

@@ -1,9 +1,9 @@
 const {
     getAuthenticationURL,
-    getSessionToken,
-    getApiAccessToken
+    getApiAccessToken,
+    generateBearerAccessToken
 } = require('../services/nitendo-auth.service');
-const { getUserFriendList, getUser } = require('../services/nintendo.service');
+const { getUserFromFriends, getUser } = require('../services/nintendo.service');
 
 function handleServerError(response, error) {
     return response.status(500).send({
@@ -23,20 +23,8 @@ module.exports = {
     async getAccessToken(request, response) {
         try {
             const { receivedUrl, verifier } = request.query;
-            const params = {};
-            receivedUrl.split('#')[1]
-                .split('&')
-                .forEach(str => {
-                    const splitStr = str.split('=');
-                    params[splitStr[0]] = splitStr[1];
-                });
-            const code = params.session_token_code;
-            const sessionToken = await getSessionToken(code, verifier);
-            const accessToken = await getApiAccessToken(sessionToken);
-            response.json({
-                sessionToken,
-                accessToken,
-            });
+            const result = await generateBearerAccessToken(receivedUrl, verifier);
+            response.json(result);
         } catch (error) {
             handleServerError(response, error);
         }
@@ -65,12 +53,8 @@ module.exports = {
         try {
             const accessToken = request.headers.authorization.replace('Bearer ', '');
             const { userToTrack } = request.query;
-            const userInformation = await getUserFriendList(accessToken);
-
-            const userFound = userInformation.result.friends
-            .find(x => x.name.toLowerCase() === userToTrack.toLowerCase());
-
-            response.json(userFound ? userFound : {});
+            const userInformation = await getUserFromFriends(accessToken, userToTrack);
+            response.json(userInformation);
         } catch (error) {
             handleServerError(response, error);
         }

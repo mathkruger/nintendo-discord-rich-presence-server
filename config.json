@@ -13,5 +13,6 @@
         "SEGA Mega Drive - Nintendo Switch Online": "mega-drive",
         "The Legend of Zelda: Breath of the Wild": "zelda-botw",
         "Stardew Valley": "stardew-valley"
-    }
+    },
+    "cache_path": "./"
 }

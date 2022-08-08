@@ -203,8 +203,27 @@ async function getApiAccessToken(sessionToken) {
     return apiAccessToken;
 }
 
+async function generateBearerAccessToken(url, verifier) {
+    const params = {};
+    url.split('#')[1]
+        .split('&')
+        .forEach(str => {
+            const splitStr = str.split('=');
+            params[splitStr[0]] = splitStr[1];
+        });
+    const code = params.session_token_code;
+    const sessionToken = await getSessionToken(code, verifier);
+    const accessToken = await getApiAccessToken(sessionToken);
+
+    return {
+        sessionToken,
+        accessToken
+    };
+}
+
 module.exports = {
     getAuthenticationURL,
     getSessionToken,
     getApiAccessToken,
+    generateBearerAccessToken
 }
