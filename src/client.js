@@ -6,6 +6,7 @@ const {
 
 const { getAuthenticationURL, generateBearerAccessToken } = require('./services/nitendo-auth.service');
 const { getUserFromFriends } = require('./services/nintendo.service');
+const { updatePresence } = require('./services/discord.service');
 
 const auth = {
     getSavedAccessToken() {
@@ -50,6 +51,19 @@ const presence = {
             console.log('Jogando atualmente: ' + user.presence.game.name);
             console.log('Já jogou por ' + user.presence.game.totalPLayTime + ' segundos');
         }
+    },
+    updateDiscordPresence(user) {
+        if (user.presence.status === 'ONLINE') {
+            updatePresence({
+                state: 'playing',
+                details: user.presence.game.name,
+            });
+        }
+        else {
+            updatePresence({
+                state: 'no-game',
+            });
+        }
     }
 }
 
@@ -78,7 +92,9 @@ async function init() {
     
     const loop = setInterval(async () => {
         const user = await presence.getUserPresence(token);
+        
         presence.printPresence(user);
+        presence.updateDiscordPresence(user);
     }, 30000);
 
     exitProgram(() => {
