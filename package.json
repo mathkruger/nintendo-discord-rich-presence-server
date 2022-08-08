@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js --mode api",
-    "start-client": "node src/index.js --mode client"
+    "start-client": "node src/index.js --mode client",
+    "generate-cache": "touch cache.json"
   },
   "keywords": [],
   "author": "",
