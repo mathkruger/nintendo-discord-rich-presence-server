@@ -1,5 +1,4 @@
 const app_config = require('../../config');
-const client = require('discord-rich-presence')(app_config.discord_clients[0].client);
 
 const gameStatusEnum = {
     'playing': '🕹 Jogando',
@@ -11,6 +10,8 @@ const gameStatusEnum = {
 module.exports = {
     updatePresence(request, response) {
         try {
+            const client = require('discord-rich-presence')(app_config.discord_clients[0].client);
+
             const { state, details, friendCode, eshopUrl } = request.query;
             const gameName = decodeURI(details);
 

@@ -1,8 +1,9 @@
 const { api } = require("./api");
 const { client } = require("./client");
 
-const mode = (process.argv.find(x => x.includes("--mode")) || "--mode api").replace("--mode", "").trim();
+const mode = (process.argv[process.argv.findIndex(x => x.includes("--mode")) + 1] || "api").trim();
 
+console.log(mode);
 
 switch(mode) {
     case "api":

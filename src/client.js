@@ -4,7 +4,7 @@ const {
     saveCache
 } = require('./utils/cache-manager');
 
-const { getAuthenticationURL } = require('./services/nitendo-auth.service');
+const { getAuthenticationURL, generateBearerAccessToken } = require('./services/nitendo-auth.service');
 const { getUserFromFriends } = require('./services/nintendo.service');
 
 const auth = {
@@ -16,8 +16,8 @@ const auth = {
         console.log('Por limitações da API da Nintendo, você precisa de uma conta secundária para rastrear sua conta principal. Sorry :(');
         console.log('Entre no link abaixo e informe a URL do botão vermelho: ');
         console.log(url);
-        const receivedUrl = reader.question("-> ");
-        const userToTrack = reader.question("Seu usuário principal (para rastrear a presença): ");
+        const receivedUrl = reader.question('-> ');
+        const userToTrack = reader.question('Seu usuário principal (para rastrear a presença): ');
         
         const tokens = await generateBearerAccessToken(receivedUrl, codeVerifier);
 
