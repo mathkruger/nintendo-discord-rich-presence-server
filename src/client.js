@@ -1,4 +1,6 @@
+const app_config = require('./../config');
 const reader = require('readline-sync');
+const client = require('discord-rich-presence')(app_config.discord_clients[0].client);
 const {
     readCache,
     saveCache
@@ -53,17 +55,19 @@ const presence = {
         }
     },
     updateDiscordPresence(user) {
-        if (user.presence.status === 'ONLINE') {
-            updatePresence({
+        let status = {
+            state: 'no-game',
+            details: 'z z z'
+        };
+
+        if (user.presence.state == 'ONLINE') {
+            status = {
                 state: 'playing',
                 details: user.presence.game.name,
-            });
+            };
         }
-        else {
-            updatePresence({
-                state: 'no-game',
-            });
-        }
+
+        const result = updatePresence(client, status);
     }
 }
 

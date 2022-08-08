@@ -8,9 +8,8 @@ const gameStatusEnum = {
 };
 
 module.exports = {
-    updatePresence({ state, details, friendCode, eshopUrl }) {
+    updatePresence(client, { state, details, friendCode, eshopUrl }) {
         try {
-            const client = require('discord-rich-presence')(app_config.discord_clients[0].client);
             const gameName = decodeURI(details);
 
             const presenceStatus = {
