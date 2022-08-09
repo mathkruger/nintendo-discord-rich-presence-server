@@ -96,21 +96,24 @@ async function main() {
     const errorCallback = async (error) => {
         if (!error) {
             console.log('Você precisa estar logado para acessar essa aplicação');
+            process.exit(0);
         }
         else {
-            if (error.message.includes('Token expired')) {
-                await updateToken();
-                await main();
-            }
-            else if (error.message.includes('Invalid token')) {
-                console.log('A sua sessão é muito antiga, é necessário fazer um novo login.');
-            }
-            else {
-                console.log('ERRO DESCONHECIDO: ', error);
+            if(!error.message.includes('AbortError: The user aborted a request.')) {
+                if (error.message.includes('Token expired')) {
+                    await updateToken();
+                    await main();
+                }
+                else if (error.message.includes('Invalid token')) {
+                    console.log('A sua sessão é muito antiga, é necessário fazer um novo login.');
+                    process.exit(0);
+                }
+                else {
+                    console.log('ERRO DESCONHECIDO: ', error);
+                    process.exit(-1);
+                }
             }
         }
-
-        process.exit(0);
     };
 
     let loop = null;
