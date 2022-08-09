@@ -12,7 +12,9 @@
         "Nintendo Entertainment System - Nintendo Switch Online": "nes",
         "SEGA Mega Drive - Nintendo Switch Online": "mega-drive",
         "The Legend of Zelda: Breath of the Wild": "zelda-botw",
-        "Stardew Valley": "stardew-valley"
+        "Stardew Valley": "stardew-valley",
+        "Super Mario 3D All-Stars": "mario-3d-allstars",
+        "Xenoblade Chronicles 3": "xenoblade-chronicles-3"
     },
     "cache_path": "./"
 }

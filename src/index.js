@@ -1,7 +1,8 @@
 const { api } = require("./api");
-const { client } = require("./client");
+const { client } = require("./client/client");
+const { login } = require("./client/login");
 
-const mode = (process.argv[process.argv.findIndex(x => x.includes("--mode")) + 1] || "api").trim();
+const mode = (process.argv[2] || "api").trim();
 
 switch(mode) {
     case "api":
@@ -10,5 +11,9 @@ switch(mode) {
 
     case "client":
         client.init();
+    break;
+
+    case "login":
+        login();
     break;
 }
