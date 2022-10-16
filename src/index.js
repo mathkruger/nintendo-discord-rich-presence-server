@@ -14,6 +14,6 @@ switch(mode) {
     break;
 
     case "login":
-        login();
+        login(process.argv[3]);
     break;
 }

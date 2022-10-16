@@ -8,19 +8,18 @@ const {
 } = require('../services/nitendo-auth.service');
 
 module.exports = {
-    async login() {
+    async login(userToTrack) {
+        if (!userToTrack) {
+            throw new Error("You need to inform the user to track!");
+        }
+
         const { url, codeVerifier } = getAuthenticationURL();
 
         const questions = [
             {
-                type: 'editor',
+                type: 'input',
                 name: 'receivedUrl',
                 message: '1 - Copie a URL do botão vermelho e cole aqui'
-            },
-            {
-                type: 'input',
-                name: 'userToTrack',
-                message: '2 - Digite seu nome de usuário para rastrear'
             }
         ];
     
@@ -33,7 +32,7 @@ module.exports = {
         console.log(url);
         console.log('-------------------------------------');
 
-        const { receivedUrl, userToTrack } = await inquirer.prompt(questions);
+        const { receivedUrl } = await inquirer.prompt(questions);
 
         const tokens = await generateBearerAccessToken(receivedUrl, codeVerifier);
 
